@@ -1,0 +1,25 @@
+#file links - shortcuts
+ln /short directory
+create a file file_a
+create soft link file_b pointing to file_a
+create hard link file_c pointing to file_a
+verify all links work
+
+sudo mkdir /shorts
+touch file_a
+mv file_a /shorts/
+mv file_a /shorts/
+cd /shorts/
+ls
+ln -s file_a file_b
+ ln -s file_a file_b
+ls
+ln file_a file_c
+ ln file_a file_c
+
+ll
+echo test >>file_a
+cat file_b
+cat file_a
+cat file_c
+

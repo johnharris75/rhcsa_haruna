@@ -1,0 +1,11 @@
+#text search and archive - man pages
+1. find the string "listen" in /etc/httpd/conf/httpd.conf and save the output to /root/web.txt
+
+ grep Listen /etc/httpd/conf/httpd.conf >> /root/web.txt
+ cat /root/web.txt
+
+1.2 create a gzip tar of /etc named etc_vault.tar.gz in /vaults dir
+	use man pages for gzip options
+
+mkdir /vaults
+tar -cvfz /vaults/etc_vault.tar.gz /etc

@@ -1,0 +1,11 @@
+ reset root password
+
+e to edit grub
+add rd.break to end of line
+cntrl x to boot
+mount -o rw,remount /sysroot
+chroot /sysroot
+passwd 
+touch /.autorelabel
+exit
+

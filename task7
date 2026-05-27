@@ -1,0 +1,48 @@
+#Tuning profile configuration and SELINUX
+
+check the current recommended for tuning
+	tuned-adm recommend
+
+put SELinux in permissive mode node2
+	setenforce 0
+	vi /etc/selinux/config set to permissive
+node1 ensure network service is enabled and starts on boot
+	systemctl start NetworkManager
+	systemctl enable --now NetworkManager
+
+#Persistent Journaling
+Configure persistent journaling on both servers to retain logs across reboots
+	mkdir /var/log/journal
+	journalctl --flush
+ 	
+#Process scheduling
+start a stress-ng process on node1 with a niceness value of 19
+	nice -n 19 stress-ng -c 1 &
+	
+adjust the niceness value on the running stress-ng process to 10
+	top , hit r , select pid and set to 10
+terminate the stress-ng process
+	top, hit  k, selecte stress-ng process
+
+#Files permissions and ACL's
+copy /etc/fstab to /var/tmp
+	cp /etc/fstab /var/tmp
+set the file owner to root
+	chown root /var/tmp/fstab
+ensure /var/tmp is not executable by anyone
+	check permissions for x
+configure acls on the copied file to:
+
+user adam: read and write
+	setfacl -m adam:rw /var/tmp/fstab
+user maryam: no access
+	setfacl -m maryam:--- /var/tmp/fstab
+all other users: read only
+	setfacl -m o:r-- /var/tmp/fstab
+
+
+#secure file transfer
+on node1 create a file node1-file.ext and scp it to the home dir of user john on node2
+	ssh node1
+	touch node1-file.txt
+	scp node1-file.txt john@192.168.1.107:/home/john

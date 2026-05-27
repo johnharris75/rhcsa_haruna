@@ -1,0 +1,14 @@
+#remote access and file permissions
+
+from node1 ssh into node2 as user john 
+ ssh john@node2
+
+copy the contents from /etc/fstab to /var/tmp/
+cp /etc/fstab /var/tmp
+
+set the file permissions to root
+chown root /var/tmp/fstab
+
+ensure no execute permissions for anyone
+ls /var/tmp
+

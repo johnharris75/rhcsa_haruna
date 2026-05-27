@@ -1,0 +1,15 @@
+#advanced file operation - find
+find files in /usr that are greater then 3MB but <10mb and copy them to /bigfiles dir
+	find /usr -type f -size +3M -size +10M -exec cp {} /bigfiles \;
+
+find file in /etc modified more thatn 120 days ago and copy to /var/tmp/twenty
+	mkdir /var/tmp/twenty
+	find /etc -type f -mtime +120 -exec cp {} /var/tmp/twenty/ \;
+
+find all files owned by user john and copy them to /root/j-files
+	find /home/john/ -type f -user john -exec cp {} /tmp/jfiles \;
+
+find files named httpd.conf and save the absolute paths to /root/httpd-paths-txt
+	find / -type f -name httpd.conf >> /root/httpd-paths.txt
+
+

@@ -1,0 +1,72 @@
+# create simple shell scripts
+# sized base file search
+find files in /usr size >30kb but <50kb
+outputs results to /root/sized_files.txt
+
+find /usr -type f -size +30k -size -50k > /root/sized_files.txt
+
+#conditional script
+create /root/career.sh that:
+outputs "Yes, I am a system engineer" when run with ./career.sh me
+outputs "Okay, they do cloud engineering" when run with ./career.sh they
+outputs usage ./career.sh me|they for invalid/empty arguments
+
+#/bin/bash
+if [ "$1" == "me" ]
+ then
+  echo "Yes, I am a Systems Engineer"
+elif [ "$1" == "they" ]
+then
+ echo "Okay, they do cloud enginnering"
+elif [ -z "$1"  ]
+then
+ echo "Please provide and argument me|they"
+
+else
+ echo "Usage: ./career.sh me|they"
+fi
+
+#file processing
+write shell script on node1 that creates users and groups according to the following parametersmaryam:2033:hpc_admin,hpc_managers
+adam:2040:sysadmin
+jacob:2050:hpc_admin
+#3 scripts and 2 files with contents
+script to  create groups with guids
+script to add users and give the correct permissions
+script to set the password
+
+#groups.txt contents
+sysadmin:6051
+hpc_admin:7050
+hpc_managers:8052
+
+#Script to read groups.txt file and create groups with gids
+#!/bin/bash
+while IFS=":" read group gid;
+do
+        groupadd -g $gid $group;
+done < groups.txt
+
+#sctipt to create the users 
+#!/bin/bash
+while IFS=":" read user uid groups;
+do
+ useradd -G $groups -u $uid $user;
+done < users.txt
+
+
+write a shell script that sets the passwords on ther users maryam, adam and jacob to Password@1
+#script to set passwords from a text file
+#users.txt contents
+sysadmin:6051
+hpc_admin:7050
+hpc_managers:8052
+
+Script that sets the same password for users and uids from a file
+#!/bin/bash
+
+for user in adam maryam jacob ;
+do
+ echo "Password@1" | passwd --stdin $user;
+done
+
