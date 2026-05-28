@@ -1,0 +1,38 @@
+Manage users and groups
+create a group named sharegroup and the following users:
+	groupadd sharegroup
+
+haruna with no login shell not a member of sharegroup
+	useradd -s /sbin/nologin haruna
+
+umar member of sharegroup
+	useradd -G sharegroup umar
+
+adoga with uid 444 member of shregroup
+	useradd -u 4444 -G sharegroup adoga
+
+all users should have a password persward
+	as root for user in umar adoga haruna;do echo "persward" | passwd --stdin $user; done
+
+change password for adoga to perfect
+	passwd adoga perfect
+
+
+password policies
+#enfore password policy to have a min lenght of 8 characters
+	vi /etc/security/pwquality.conf
+	enable  minlen = 8
+
+set the max password age to 30
+	vi /etc/login.defs
+	PASS_MAX_DAYS  30 
+
+delete users and groups
+remove the user umar from sharegroup
+delete the sharegroup
+delete user haruna with home dir
+
+
+	vi /etc/security/pwquality.conf
+	enable  minlen = 8
+

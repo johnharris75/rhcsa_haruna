@@ -1,0 +1,59 @@
+#Deploy, configure and maintain system
+
+Create job configuration
+create a cron job for users john that runs logger "This was easy" every 2 minutes
+use at the write this task the easy way to /at-files.at.txt in 2 minutes
+
+#crontab -e
+*/2 * * * * logger "Hi this is John"
+
+#at command 
+echo "This was easy" >> /at-files/at.txt | at now + 2 minutes
+
+
+Local Yum Config
+configure BaseOs and AppStream
+vi /etc/yum/repos.d/reponame.repo
+[BaseOS]
+name=BaseOs Repo
+baseurl=http:/repoaddress/BaseOs
+enabled=1
+gpgcheck=0
+
+[AppStream]
+name=Appstream Repo
+baseurl=http:/repoaddress/Appstream
+enabled=1
+gpgcheck=0
+#confirm with dnf repolist
+dnf repolist
+
+
+NTP Chrony congifuration
+setup chrony time service to sync time with server.rhel.com
+
+vi /etc/chrony.conf
+add pool server.rhel.com iburst
+
+#restart chronyd service
+systemctl restart chronyd
+
+#check that the new server is avaialbe
+chronyc sources
+
+
+Grub bootloader
+set GRUB_TIMEOUT=10
+GRUB_TIMEOUT_STYLE=hidden
+and quiet to GRUB_CMDLINE_LINUX
+apply your changes to the grub config file
+
+
+vi /etc/default/grub
+make changes
+add GRUB_TIMEOUT_STYLE=hidden if its not there
+GRUB_CMDLINE_LINUX add quiet to the end of the line
+
+#save
+grub2-mkconfig -o /boot/grub2/grub.cfg
+

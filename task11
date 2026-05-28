@@ -1,0 +1,32 @@
+#manage basic networking
+
+hostname node5.rhcsa
+	hostnamectl set-hostname node5.rhsca
+	nmtui >sethostname > ok
+	nmcli general hostname node5.rhcsa
+	nmcli con up enp0s3
+	systemctl restart NetworkManager
+
+set dns search domain to rhel.server.com
+nmcli connection modify enp0s3 ipvi4.dns-search rhel.server.com
+
+Static Ip Address
+assign Ip dns gateway
+	ip a to find interface
+	nmcli connecion modify enp0s3 ipv4.addresses 192.168.1.200 ipv4.gateway 192.168.1.1 ipv4.dns 192.168.1.255
+	ip a again to see if the ip has changed
+	nmcli con up enp0s3
+
+Firewall Rules
+	enable netwok services
+	ensure network starts at boot
+	allow access SSH and HTTP services using firewall-cmd
+	systemctl status NetworkManager
+	systemctl enable --now NetworkManager
+	systemctl status NetworkManager
+	firewall-cmd --list-all
+	firewall-cmd --permanent --add-service=http
+	firewall-cmd --permanent --add-service=rpc-bind
+	firewall-cmd --reload
+	firewall-cmd --list-all
+
