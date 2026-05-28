@@ -1,0 +1,67 @@
+#Configure local storage
+setup LVM on node1
+create a logical volume named devops_lv 32 extents using /dev/vdb disk
+this chould be created from a volume group named devops_vg with 20MB physical extents
+format the logical volume as ext4 filesystem and mount persistently at /mnt/devop_lv
+
+check your work
+
+create and mount swap volume persistently
+from /dev/sdb create a 800MB swap partition configure to mount persistently
+all your changes must persist after a reboot
+#view block
+lsblk
+#create partitions
+fdisk /dev/sdc
+#creater physical volume
+pvcreate /dev/sdc1
+#create volume group with 20MB physical extents
+vgcreate -s 20M devops_vg /dev/sdc1
+#volume group display
+vgdisplay
+#create logical volume group with 30 extents
+ lvcreate -n devops_lv -l 30 devops_vg
+#view logical volumes
+lvs
+#create ext filessytem on the logical volume
+mkfs.ext4 /dev/devops_vg/devops_lv
+cd /mnt
+#create mount point
+mkdir devops_lv
+#add to /etc/fstab for persistence
+vi /etc/fstab
+#mount all
+mount -a
+#check if the mount is there
+df -h
+#reboot
+reboot
+#check /etc/fstab
+cat /etc/fstab
+
+#create a 512MB swap partition
+Create a 512MB swap partition
+lsblk
+fdisk /dev/sdb
+n
+Primary
+Enter
++512M
+t
+82 (swap)
+w
+#setup linux swap area
+mkswap /dev/sdb1
+#locate print block device attributes
+blkid (copy UID)
+#add to /etc/fstab
+vi /etc/fstab
+add UID swap defaults 0 0
+save
+#mount all
+mount -a
+check /etc/fstab
+# enable/disable devices and files for paging and swapping
+swapon -a
+
+

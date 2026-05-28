@@ -1,0 +1,19 @@
+Create and configure file systems
+resize devops_lv and configure swap voume
+on node1, resize the existing cloud_lv logical volume to 250MB
+
+Configure autofs for remote user home directories
+create a user named bobby with uid 4000, no home dir and a base dir on /mnt/netdir and a password hoppy
+configure nfs autofs such that the home dir of user bob is automatically mounted at /mnt/netdir/bobby on login
+note that bobbys account has been configured on the NFS server exporting their home dir at repo.rhcsa.home:/home/bobby
+log in as bobby to verify
+
+#extend /devops_lv and -r resizes the filessytem
+lvextend -L +5 /dev/devops_vg/devops_lv -r
+
+#nfs server side
+mkdir -p /home/bobby
+useradd -u 4000 -M -b /mnt/home/bobby bobby
+passwd bobby
+
+

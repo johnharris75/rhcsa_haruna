@@ -1,0 +1,32 @@
+lsblk
+   82  sudo fdisk /dev/sdc
+   83  lsblk
+   84  vgcreate /dev/sdc1
+   85  sudo vgcreate /dev/sdc1
+   86  pvcreate /dev/sdc1
+   87  sudo pvcreate /dev/sdc1
+   88  man vgcreate
+   89  vgreate -s 20M devops_vg /dev/sdc1
+   90  sudo vgcreate -s 20M devops_vg /dev/sdc1
+   91  vgdisplay
+   92  sudo vgdisplay
+   93  man lvcreate
+   94  sudo lvcreate -n devops_lv -s 32 devops_vg
+   95  sudo lvcreate -n devops_lv -l 32 devops_vg
+   96  sudo lvcreate -n devops_lv -l 30 devops_vg
+   97  lvs
+   98  sudo lvs
+   99  mkfs.ext4 /dev/devops_vg/devops_lv
+  100  sudo mkfs.ext4 /dev/devops_vg/devops_lv
+  101  cd /mnt
+  102  ls
+  103  mkdir devops_lv
+  104  sudo mkdir devops_lv
+  105  vi /etc/fstab
+  106  sudo vi /etc/fstab
+  107  mount -a
+  108  sudo mount -a
+  109  sudo vi /etc/fstab
+  110  sudo mount -a
+  111  df -h
+
