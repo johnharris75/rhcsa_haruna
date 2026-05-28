@@ -1,0 +1,26 @@
+Manage Security
+
+Configure key-named authentication as root & allow ssh root access
+Generate ssh key on node1, ans setup key-based authentication for the root user
+	ssh-keygen
+	ssh-copy-id -i ~/.ssh/id_rsa.pub root@ip address
+	
+Enable ssh root login and test your configuration
+	vi /etc/ssh/sshd_config
+	set PermitRootLogin yes
+	systemctl restart sshd
+
+
+HTTPD Server troubleshooting SELinux
+The web server on node1 (182.168.70.10) is listening on port 85, ensure 	that tthe website is reachable via that port
+Fix SELinux context /var/www/html, it needed 
+	semanage port -a -t http_port_t -p tcp 85
+	semanage port -l | grep http
+
+	firewall-cmd --add-port=85/tcp --permanent
+	firewall-cmf --reload
+
+Test using curl http://serverip/ or use a web browser
+	curl http://192.168.1.107/85
+
+

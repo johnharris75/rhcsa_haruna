@@ -29,10 +29,8 @@ set the max password age to 30
 
 delete users and groups
 remove the user umar from sharegroup
+	gpasswd -d umar sharegoup
 delete the sharegroup
+	groupdel sharegroup
 delete user haruna with home dir
-
-
-	vi /etc/security/pwquality.conf
-	enable  minlen = 8
-
+	

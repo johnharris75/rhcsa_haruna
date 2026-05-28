@@ -1,0 +1,14 @@
+Container Image Creation
+As user john on node1 192.168.1.107, build a container image named web_image using the container file located at http://repo.rhcsa.home/containers/Containerfile
+
+SystemD rootless container servic
+	as root loginctl enable-linger john
+#deploy john_web container with the following:
+#map host port 8000 --> container port 80
+#map the host directory /opt/user_files to container dir /opt/user_files. Files should be accessible
+#build image
+	podman image built -t web_image -f http://repo.rhcsa.home/containers/Containerfile
+#deply container in detached and interactive mode map host port 8000 to 80 
+	podman run -dit --name john_web -p 8000:80 -v /opt/user_fies:/opt/userfiles:z web_image
+Configure the container as a systemd service to start boot
+
