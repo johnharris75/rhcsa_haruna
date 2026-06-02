@@ -8,4 +8,4 @@
 	use man pages for gzip options
 
 mkdir /vaults
-tar -cvfz /vaults/etc_vault.tar.gz /etc
+tar cvfz /vaults/etc_vault.tar.gz /etc

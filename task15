@@ -1,0 +1,14 @@
+Manage Software - FLATPAK
+Configure flatpak repo
+install flatpak package manager
+add flathub remote repo https://flathub.org/repo/flathub.flatpak.repo
+add RHEL flatpak remote repo https://flatpaks.redhat.io/rhel.flatpakrepo
+verify all configured flatpak remotes
+
+Install and remove
+search for firefox in flatpak repositories
+install firefox from flathub
+list all installed flatpak applications
+
+
+
